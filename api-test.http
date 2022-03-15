@@ -1,1 +1,26 @@
 GET http://localhost:3000/api/jokes
+
+###
+
+GET http://localhost:3000/api/jokes/nvhGGI9AeEZKyVPDZorjQ
+
+###
+
+POST http://localhost:3000/api/jokes
+content-type: application/json
+
+{
+  "joke": "!false — It's funny because it's true."
+}
+
+###
+
+DELETE http://localhost:3000/api/jokes/nvhGGI9AeEZKyVPDZorjQ
+
+###
+
+PATCH http://localhost:3000/api/jokes/nvhGGI9AeEZKyVPDZorjQ
+content-type: application/json
+
+{
+  "joke": "Why did the programmer quit his job? Because they didn't get arrays." }
