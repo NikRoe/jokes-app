@@ -2,7 +2,12 @@ GET http://localhost:3000/api/jokes
 
 ###
 
-GET http://localhost:3000/api/jokes/nvhGGI9AeEZKyVPDZorjQ
+POST http://localhost:3000/api/jokes
+content-type: application/json
+
+{
+  "text": "!false — It's funny because it's true."
+}
 
 ###
 
@@ -10,17 +15,22 @@ POST http://localhost:3000/api/jokes
 content-type: application/json
 
 {
-  "joke": "!false — It's funny because it's true."
+  "text": "Why did the programmer quit his job? Because they didn't get arrays." 
 }
 
 ###
 
-DELETE http://localhost:3000/api/jokes/nvhGGI9AeEZKyVPDZorjQ
+GET http://localhost:3000/api/jokes/6231c79bd821c1bf61ff7
 
 ###
 
-PATCH http://localhost:3000/api/jokes/nvhGGI9AeEZKyVPDZorjQ
+DELETE http://localhost:3000/api/jokes/6231efe4d821c1bf61ff7b43
+
+###
+
+PATCH http://localhost:3000/api/jokes/6231f005d821c1bf61ff7b47
 content-type: application/json
 
 {
-  "joke": "Why did the programmer quit his job? Because they didn't get arrays." }
+  "text": "Why did the programmer quit his job? Because they didn't get arrays." 
+}

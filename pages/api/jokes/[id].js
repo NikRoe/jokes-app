@@ -1,18 +1,52 @@
-import { jokes } from "../../../utils/joke-data";
+import Joke from "../../../Schema/Joke";
+import { connectDb } from "../../../utils/db";
 
-export default function handler(request, response) {
+export default async function handler(request, response) {
   const { id } = request.query;
 
-  if (request.method === "GET") {
-    const joke = jokes.find((joke) => {
-      return joke.id === id;
-    });
-    response.status(200).json({ joke });
-  } else if (request.method === "PATCH") {
-    console.log(request.body);
-    response.status(200).json({ success: true, updatedID: id });
-  } else if (request.method === "DELETE") {
-    console.log(request.body);
-    response.status(200).json({ success: true, deletedID: id });
+  try {
+    connectDb();
+
+    switch (request.method) {
+      case "GET":
+        const requestedJoke = await Joke.findById(id);
+
+        if (requestedJoke) {
+          response.status(200).json(requestedJoke);
+        } else {
+          response.status(404).json({ error: "File not found" });
+        }
+
+        break;
+      case "PATCH":
+        const updatedJoke = await Joke.findByIdAndUpdate(
+          id,
+          { $set: request.body },
+          { returnDocument: "after", runValidators: true }
+        );
+
+        if (updatedJoke) {
+          response.status(200).json({ success: true, data: updatedJoke });
+        } else {
+          response.status(404).json({ error: "File not found" });
+        }
+
+        break;
+      case "DELETE":
+        const deletedJoke = await Joke.findByIdAndDelete(id);
+
+        if (deletedJoke) {
+          response.status(200).json({ success: true, data: deletedJoke });
+        } else {
+          response.status(404).json({ error: "File not found" });
+        }
+        break;
+      default:
+        response.status(405).json({ error: "Method not supported" });
+        break;
+    }
+  } catch (error) {
+    console.error(error.message);
+    response.status(500).json({ error: error.message });
   }
 }
