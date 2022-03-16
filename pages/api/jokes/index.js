@@ -7,7 +7,7 @@ export default async function handler(request, response) {
 
     switch (request.method) {
       case "GET":
-        const jokes = await Joke.find().limit(5);
+        const jokes = await Joke.find();
 
         response.status(200).json({ data: jokes });
         break;
