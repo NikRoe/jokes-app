@@ -20,7 +20,7 @@ content-type: application/json
 
 ###
 
-GET http://localhost:3000/api/jokes/6231c79bd821c1bf61ff7
+GET http://localhost:3000/api/jokes/6231d00cd821c1bf61ff7b28
 
 ###
 
