@@ -80,11 +80,15 @@ export default function Home() {
             <StyledArticle key={joke._id}>
               <span>{joke.text}</span>
               <StyledContainer>
-                <EditForm joke={joke} swrJokes={swrJokes}></EditForm>
+                <EditForm
+                  joke={joke}
+                  swrJokes={swrJokes}
+                  onDelete={handleDelete}
+                ></EditForm>
 
-                <StyledButton onClick={(item) => handleDelete(joke._id)}>
+                {/* <StyledButton onClick={(item) => handleDelete(joke._id)}>
                   Delete
-                </StyledButton>
+                </StyledButton> */}
               </StyledContainer>
             </StyledArticle>
           ))
