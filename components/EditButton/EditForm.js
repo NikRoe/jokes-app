@@ -1,7 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
+import DeleteButton from "../DeleteButton/DeleteButton";
 
-export default function EditForm({ joke, swrJokes }) {
+export default function EditForm({ joke, swrJokes, onDelete }) {
   const [isActive, setIsActive] = useState(false);
 
   function editHandler() {
@@ -20,7 +21,7 @@ export default function EditForm({ joke, swrJokes }) {
 
     const updatedJoke = await response.json();
     if (response.ok) {
-      alert(`Data has been updated with text ${updatedJoke.data.text}`);
+      alert(`Joke text has been updated to ${updatedJoke.data.text}`);
       swrJokes.mutate();
     } else {
       alert(`oops - ${updatedJoke.error}`);
@@ -31,7 +32,7 @@ export default function EditForm({ joke, swrJokes }) {
   return (
     <>
       {isActive ? (
-        <form onSubmit={handleUpdate}>
+        <StyledForm onSubmit={handleUpdate}>
           <label htmlFor="editfield"></label>
           <StyledInputField
             id="editfield"
@@ -41,9 +42,12 @@ export default function EditForm({ joke, swrJokes }) {
             defaultValue={joke.text}
           ></StyledInputField>
           <StyledInput type="submit" value="Update"></StyledInput>
-        </form>
+        </StyledForm>
       ) : (
-        <StyledButton onClick={editHandler}>Edit</StyledButton>
+        <>
+          <StyledButton onClick={editHandler}>Edit</StyledButton>
+          <DeleteButton onDelete={onDelete} joke={joke}></DeleteButton>
+        </>
       )}
     </>
   );
@@ -71,6 +75,12 @@ const StyledButton = styled.button`
 
 const StyledInputField = styled.input`
   border-radius: 14px;
-  width: 80px;
+  width: 200px;
   height: 50px;
+`;
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
