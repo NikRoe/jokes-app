@@ -40,7 +40,7 @@ export default function Home() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    let jokeText = event.target.elements.joke.value;
+    const jokeText = event.target.elements.joke.value;
     //the above constant equals to value of the element that is within the form element and has the name joke
 
     const response = await fetch("api/jokes", {
@@ -53,6 +53,7 @@ export default function Home() {
     if (response.ok) {
       alert(`Data has been added with ID ${createdJoke.data._id}`);
       swrJokes.mutate();
+      event.target.reset();
     } else {
       alert(`oops - ${createdJoke.error}`);
     }

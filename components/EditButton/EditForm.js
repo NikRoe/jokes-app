@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 export default function EditForm({ joke, swrJokes }) {
   const [isActive, setIsActive] = useState(false);
-  console.log("Joke:", joke);
 
   function editHandler() {
     setIsActive(!isActive);

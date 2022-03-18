@@ -1,7 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-export default function SubmitForm({ setFormValue, onSubmit, formValue }) {
+export default function SubmitForm({ onSubmit }) {
+  const [formValue, setFormValue] = useState("");
   function handleChange(inputValue) {
     console.log(inputValue);
     setFormValue(inputValue);
@@ -16,6 +17,7 @@ export default function SubmitForm({ setFormValue, onSubmit, formValue }) {
         required
         type="text"
         name="joke"
+        value={formValue}
         onChange={(e) => handleChange(e.target.value)}
       ></StyledInputField>
       <StyledInput type="submit" value="Submit"></StyledInput>
