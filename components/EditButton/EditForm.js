@@ -1,6 +1,7 @@
 import { useState } from "react";
+import styled from "styled-components";
 
-export default function EditButton({ joke }) {
+export default function EditForm({ joke, swrJokes }) {
   const [isActive, setIsActive] = useState(false);
 
   function editHandler() {
@@ -20,6 +21,7 @@ export default function EditButton({ joke }) {
     const updatedJoke = await response.json();
     if (response.ok) {
       alert(`Data has been updated with text ${updatedJoke.data.text}`);
+      swrJokes.mutate();
     } else {
       alert(`oops - ${updatedJoke.error}`);
     }
@@ -31,12 +33,44 @@ export default function EditButton({ joke }) {
       {isActive ? (
         <form onSubmit={handleUpdate}>
           <label htmlFor="editfield"></label>
-          <input id="editfield" type="text" required name="editfield"></input>
-          <input type="submit" value="Update"></input>
+          <StyledInputField
+            id="editfield"
+            type="text"
+            required
+            name="editfield"
+            defaultValue={joke.text}
+          ></StyledInputField>
+          <StyledInput type="submit" value="Update"></StyledInput>
         </form>
       ) : (
-        <button onClick={editHandler}>Edit</button>
+        <StyledButton onClick={editHandler}>Edit</StyledButton>
       )}
     </>
   );
 }
+
+const StyledInput = styled.input`
+  background-color: #a67458;
+  border-radius: 14px;
+  &:hover {
+    cursor: pointer;
+  }
+  height: 50px;
+  width: 80px;
+`;
+
+const StyledButton = styled.button`
+  background-color: #a67458;
+  border-radius: 14px;
+  &:hover {
+    cursor: pointer;
+  }
+  height: 50px;
+  width: 80px;
+`;
+
+const StyledInputField = styled.input`
+  border-radius: 14px;
+  width: 80px;
+  height: 50px;
+`;
