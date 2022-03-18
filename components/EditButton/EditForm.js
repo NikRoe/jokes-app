@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export default function EditForm({ joke, swrJokes }) {
   const [isActive, setIsActive] = useState(false);
+  console.log("Joke:", joke);
 
   function editHandler() {
     setIsActive(!isActive);
@@ -33,12 +34,13 @@ export default function EditForm({ joke, swrJokes }) {
       {isActive ? (
         <form onSubmit={handleUpdate}>
           <label htmlFor="editfield"></label>
-          <StyledInput
+          <StyledInputField
             id="editfield"
             type="text"
             required
             name="editfield"
-          ></StyledInput>
+            defaultValue={joke.text}
+          ></StyledInputField>
           <StyledInput type="submit" value="Update"></StyledInput>
         </form>
       ) : (
@@ -66,4 +68,10 @@ const StyledButton = styled.button`
   }
   height: 50px;
   width: 80px;
+`;
+
+const StyledInputField = styled.input`
+  border-radius: 14px;
+  width: 80px;
+  height: 50px;
 `;

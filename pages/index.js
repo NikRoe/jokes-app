@@ -1,6 +1,8 @@
+import { useState } from "react";
 import styled from "styled-components";
 import useSWR from "swr";
 import EditForm from "../components/EditButton/EditForm";
+import SubmitForm from "../components/SubmitForm/SubmitForm";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -37,7 +39,8 @@ export default function Home() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const jokeText = event.target.elements.joke.value;
+
+    let jokeText = event.target.elements.joke.value;
     //the above constant equals to value of the element that is within the form element and has the name joke
 
     const response = await fetch("api/jokes", {
