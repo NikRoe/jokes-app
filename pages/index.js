@@ -1,8 +1,6 @@
-import { useState } from "react";
 import styled from "styled-components";
 import useSWR from "swr";
 import EditForm from "../components/EditButton/EditForm";
-import SubmitForm from "../components/SubmitForm/SubmitForm";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -26,14 +24,15 @@ export default function Home() {
   // }, [jokes]);
 
   async function handleDelete(id) {
-    console.log(id);
-    const response = await fetch(`/api/jokes/${id}`, { method: "DELETE" });
-    const deletedJoke = await response.json();
-    if (response.ok) {
-      alert(`Data with ID ${deletedJoke.data._id} has been deleted`);
-      swrJokes.mutate();
-    } else {
-      alert(`oops - ${deletedJoke.error}`);
+    if (confirm("Are you sure you want to delete this joke")) {
+      const response = await fetch(`/api/jokes/${id}`, { method: "DELETE" });
+      const deletedJoke = await response.json();
+      if (response.ok) {
+        alert(`Data with ID ${deletedJoke.data._id} has been deleted`);
+        swrJokes.mutate();
+      } else {
+        alert(`oops - ${deletedJoke.error}`);
+      }
     }
   }
 

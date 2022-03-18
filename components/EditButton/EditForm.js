@@ -20,7 +20,7 @@ export default function EditForm({ joke, swrJokes }) {
 
     const updatedJoke = await response.json();
     if (response.ok) {
-      alert(`Data has been updated with text ${updatedJoke.data.text}`);
+      alert(`Joke text has been updated to ${updatedJoke.data.text}`);
       swrJokes.mutate();
     } else {
       alert(`oops - ${updatedJoke.error}`);
