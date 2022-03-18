@@ -120,7 +120,7 @@ const StyledArticle = styled.article`
   flex-direction: column;
   width: 250px;
   height: 250px;
-  background-color: #7ab8bf;
+  background-color: #3b848c;
   border-radius: 14px;
   justify-content: space-between;
   padding: 1rem;
