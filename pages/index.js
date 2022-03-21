@@ -85,10 +85,6 @@ export default function Home() {
                   swrJokes={swrJokes}
                   onDelete={handleDelete}
                 ></EditForm>
-
-                {/* <StyledButton onClick={(item) => handleDelete(joke._id)}>
-                  Delete
-                </StyledButton> */}
               </StyledContainer>
             </StyledArticle>
           ))
